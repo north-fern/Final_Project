@@ -15,14 +15,14 @@ import passwords
 ev3 = EV3Brick()
 ev3.speaker.beep()
 
-right = Motor.Port(D)
-left = Motor.Port(A)
+right = Motor(Port.D)
+left = Motor(Port.A)
 
 ford = DriveBase(left, right, 56, 90)
 
-color = colorSensor.Port(S1)
+color = ColorSensor(Port.S1)
 
-Key = passwords.Keys[Key]
+Key = passwords.Key
 
 ## SYSTEM LINK CODE TAKEN FROM MIDTERM
 def setup_systemlink():
@@ -57,23 +57,28 @@ def get_from_system_link(Tag):
     return result
 
 def driveCar():
-    onMat = color.Color()
-    if onMat != (Color.GREEN or Color.BLUE):
+    onMat = color.reflection()
+    print(onMat)
+    while onMat <= 3:
         ## rotate a bit right
-        ford.drive(30, 0)
-        wait(50)
-    onMat = color.Color()
-    if onMat != (Color.GREEN or Color.BLUE):
-        ## rotate a bit left
-        ford.drive(30, 0)
-        wait(100) ## turn back then turn some more
-    else:
-        ford.drive(0, 30)
+        print('TURN RIGHT')
+        ford.drive(15, 50)
+        wait(100)
+        onMat = color.reflection()
+        print(onMat)
+        if onMat <= 3:
+            ## rotate a bit left
+            print('TURN LEFT')
+            ford.drive(15,-50)
+            wait(200) ## turn back then turn some more
+            onMat = color.reflection()
+    ford.drive(-60, 0)
 
 go = False
 while go == False:
     go = get_from_system_link('Start19')
-
-while go == True:
-    driveCar()
     
+
+for i in range(100):
+    driveCar()
+    wait(100)
