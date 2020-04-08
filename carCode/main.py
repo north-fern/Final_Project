@@ -22,7 +22,6 @@ ford = DriveBase(left, right, 56, 90)
 
 color = colorSensor.Port(S1)
 
-
 Key = passwords.Keys[Key]
 
 ## SYSTEM LINK CODE TAKEN FROM MIDTERM
@@ -60,11 +59,21 @@ def get_from_system_link(Tag):
 def driveCar():
     onMat = color.Color()
     if onMat != (Color.GREEN or Color.BLUE):
-        drive
+        ## rotate a bit right
+        ford.drive(30, 0)
+        wait(50)
+    onMat = color.Color()
+    if onMat != (Color.GREEN or Color.BLUE):
+        ## rotate a bit left
+        ford.drive(30, 0)
+        wait(100) ## turn back then turn some more
+    else:
+        ford.drive(0, 30)
 
 go = False
 while go == False:
     go = get_from_system_link('Start19')
 
 while go == True:
+    driveCar()
     
