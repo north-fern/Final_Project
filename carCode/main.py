@@ -22,18 +22,19 @@ ford = DriveBase(left, right, 56, 90)
 
 color = ColorSensor(Port.S1)
 
-Key = passwords.Key
+ROGERS = passwords.Key1
+STRONG = passwords.Key2
 
 ## SYSTEM LINK CODE TAKEN FROM MIDTERM
-def setup_systemlink():
+def setup_systemlink(key):
     #print("SETTUP FOR SYSTEMLINK")
     urlBase = "https://api.systemlinkcloud.com/nitag/v2/tags/"
-    headers = {"Accept": "application/json", "x-ni-api-key": Key}
+    headers = {"Accept": "application/json", "x-ni-api-key": key}
     return urlBase, headers
 
-def send_to_system_link(Tag, Type, Value):
+def send_to_system_link(Tag, Type, Value, key):
     print("Sending to system link")
-    urlBase, headers = setup_systemlink()
+    urlBase, headers = setup_systemlink(key)
     urlVal = urlBase + Tag + "/values/current"
     propVal = {"value":{"type": Type, "value": Value}}
     try:
@@ -43,8 +44,8 @@ def send_to_system_link(Tag, Type, Value):
         reply = 'failed'
     return reply  
 
-def get_from_system_link(Tag):
-    urlBase, headers = setup_systemlink()
+def get_from_system_link(Tag,key):
+    urlBase, headers = setup_systemlink(key)
     urlVal = urlBase + Tag + "/values/current"
     try:
         value = urequests.get(urlVal, headers = headers).text
@@ -58,27 +59,38 @@ def get_from_system_link(Tag):
 
 def driveCar():
     onMat = color.reflection()
+    #onMat = color.color()
     print(onMat)
-    while onMat <= 3:
+    while onMat >= 3:
+    #while onMat != Color.BLUE():
         ## rotate a bit right
         print('TURN RIGHT')
-        ford.drive(15, 50)
+        ford.drive(10, -50)
         wait(100)
         onMat = color.reflection()
+        #onMat = color.color()
         print(onMat)
-        if onMat <= 3:
+        if onMat >= 3:
             ## rotate a bit left
             print('TURN LEFT')
-            ford.drive(15,-50)
+            ford.drive(15,50)
             wait(200) ## turn back then turn some more
             onMat = color.reflection()
-    ford.drive(-60, 0)
+            #onMat = color.color()
+    ford.drive(-15, 0)
 
 go = False
-while go == False:
-    go = get_from_system_link('Start19')
+while go != False:
+    go = get_from_system_link('Start19', ROGERS)
+    print(go)
     
-
-for i in range(100):
+dinoFlag4 = 0
+while dinoFlag4 == 0:
     driveCar()
     wait(100)
+    dinoFlag4 = int(get_from_system_link('dino4', STRONG))
+    print('dinoFlag is', dinoFlag4)
+
+print("DONE!")
+#send_to_system_link('Start20', 'BOOLEAN', 'true', ROGERS)
+#send_to_system_link('Start19', 'BOOLEAN', 'false', ROGERS)

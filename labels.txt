@@ -1,0 +1,5 @@
+0 Bronto
+1 Hadro
+2 Dimetro
+3 Stega
+4 Null
