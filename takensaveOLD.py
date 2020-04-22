@@ -1,6 +1,6 @@
 import requests, time
-urlBase = "http://192.168.0.9/"
-filebase = 'stego_'
+urlBase = "http://192.168.0.14/"
+filebase = 'image_'
      
 def Get_Image(filename):
      try:
@@ -9,7 +9,7 @@ def Get_Image(filename):
           value = requests.get(urlBase + 'stop')  #stop - you can get rid of this if you want a continuous stream
           time.sleep(.1)
           value = requests.get(urlBase + 'download')
-          f = open('/Users/Morgan.Strong/Desktop/IMGS/Stego/' + filename,'wb')
+          f = open('/Users/Morgan.Strong/Desktop/IMGS/' + filename,'wb')
           f.write(value.content)
           f.close()
           result = True
@@ -24,5 +24,4 @@ while True:
     filename = filebase + str(counter) + '.jpg'
     Get_Image(filename)
     counter += 1
-    time.sleep(.5)
     

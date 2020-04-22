@@ -3,7 +3,7 @@ from PIL import Image, ImageOps
 import numpy as np
 import requests,time
 import pswrd
-urlBase = "http://192.168.0.14/"
+urlBase = "http://192.168.0.9/"
 filebase = 'image_'
      
 key = pswrd.Key2
@@ -114,3 +114,9 @@ while True:
             dinoflag = i
             val = predic[0][i]
     time.sleep(.5)
+    if dinoflag = 3:
+        Put_SL('dino4', 'INTEGER', 1)
+
+
+
+
