@@ -65,7 +65,7 @@ def driveCar():
     #while onMat != Color.BLUE():
         ## rotate a bit right
         print('TURN RIGHT')
-        ford.drive(10, -50)
+        ford.drive(20, -50)
         wait(100)
         onMat = color.reflection()
         #onMat = color.color()
@@ -73,14 +73,15 @@ def driveCar():
         if onMat >= 3:
             ## rotate a bit left
             print('TURN LEFT')
-            ford.drive(15,50)
+            ford.drive(20,50)
             wait(200) ## turn back then turn some more
             onMat = color.reflection()
             #onMat = color.color()
+    ford.drive(-25, 0)
     
 
 go = 'false'
-for range(3):
+for i in range(3):
     go = get_from_system_link('Start19', ROGERS)
     print(go)
 send_to_system_link('Start19', "BOOLEAN", 'true', ROGERS)

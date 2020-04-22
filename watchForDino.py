@@ -109,13 +109,18 @@ while True:
     predic = findDino(filename)
     predic = predic.tolist()
     val = 0
-    for i in range(5):
+    for i in range(4):
         if predic[0][i] > val:
             dinoflag = i
             val = predic[0][i]
-    time.sleep(.5)
-    if dinoflag = 3:
-        Put_SL('dino4', 'INTEGER', 1)
+    if dinoflag == 0:
+         Put_SL('dino1', 'INTEGER', 1)
+    if dinoflag == 1:
+         Put_SL('dino2', 'INTEGER', 1)
+    if dinoflag == 2:
+         Put_SL('dino3', 'INTEGER', 1)
+    if dinoflag == 3:
+         Put_SL('dino4', 'INTEGER', 1)
 
 
 
