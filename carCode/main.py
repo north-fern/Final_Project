@@ -101,8 +101,9 @@ while dinoFlag4 == '0':
     print('dinoFlag is', dinoFlag4)
     if touch.pressed() == True:
         dinoFlag4 = '1'
-        
+
 ford.stop()
 print("DONE!")
 send_to_system_link('Start20', 'BOOLEAN', 'true', ROGERS)
 send_to_system_link('Start19', 'BOOLEAN', 'false', ROGERS)
+send_to_system_link('dino4', 'STRING', '0', STRONG)
