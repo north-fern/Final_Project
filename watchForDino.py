@@ -112,6 +112,7 @@ while True:
          predic = predic.tolist()
          val = 0
          for i in range(4):
+             if predic[0][i] > val:
                  dinoflag = i
                  val = predic[0][i]
          if dinoflag == 0:
