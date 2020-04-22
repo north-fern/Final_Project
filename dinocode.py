@@ -10,11 +10,12 @@ key = pswrd.Key2
 
 def Get_Image(filename):
      try:
-          value = requests.get(urlBase + 'start') #start saving images
-          time.sleep(.5)
-          value = requests.get(urlBase + 'stop')  #stop - you can get rid of this if you want a continuous stream
-          time.sleep(.5)
+          #value = requests.get(urlBase + 'start') #start saving images
+          #time.sleep(.1)
+          #value = requests.get(urlBase + 'stop')  #stop - you can get rid of this if you want a continuous stream
+          #time.sleep(.1)
           value = requests.get(urlBase + 'download')
+          time.sleep(.25)
           f = open('/Users/Morgan.Strong/Desktop/IMGS/' + filename,'wb')
           f.write(value.content)
           f.close()
@@ -105,26 +106,29 @@ counter = 0
 while True:
     filename = filebase + str(counter) + '.jpg'
     Get_Image(filename)
-
     counter += 1
     try:
          predic = findDino(filename)
          predic = predic.tolist()
          val = 0
          for i in range(4):
+             if predic[0][i] > val:
                  dinoflag = i
                  val = predic[0][i]
          if dinoflag == 0:
-              Put_SL('dino1', 'INTEGER', 1)
+              Put_SL('dino1', 'STRING', '1')
+              print("DINO 1")
          if dinoflag == 1:
-              Put_SL('dino2', 'INTEGER', 1)
+              Put_SL('dino2', 'STRING', '1')
+              print("DINO 2")
          if dinoflag == 2:
-              Put_SL('dino3', 'INTEGER', 1)
+              Put_SL('dino3', 'STRING', '1')
+              print("DINO 3")
          if dinoflag == 3:
-              Put_SL('dino4', 'INTEGER', 1)
-
-     except as e:
-          print("FAIL")
+              Put_SL('dino4', 'STRING', '1')
+              print("Dino 4")
+    except:
+         print("FAIL")
           
 
 

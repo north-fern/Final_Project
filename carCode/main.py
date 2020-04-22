@@ -77,7 +77,7 @@ def driveCar():
             wait(200) ## turn back then turn some more
             onMat = color.reflection()
             #onMat = color.color()
-    ford.drive(-25, 0)
+    ford.drive(-15, 0)
     
 
 go = 'false'
@@ -90,11 +90,13 @@ go = get_from_system_link('Start19', ROGERS)
 print(go)
 
 
-dinoFlag4 = 0
-while dinoFlag4 == 0:
+dinoFlag4 = get_from_system_link('dino4', STRONG)
+print('dinoFlag is', dinoFlag4)
+
+while dinoFlag4 == '0':
     driveCar()
     wait(100)
-    dinoFlag4 = int(get_from_system_link('dino4', STRONG))
+    dinoFlag4 = get_from_system_link('dino4', STRONG)
     print('dinoFlag is', dinoFlag4)
 
 print("DONE!")
