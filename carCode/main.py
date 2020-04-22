@@ -21,6 +21,7 @@ left = Motor(Port.A)
 ford = DriveBase(left, right, 56, 90)
 
 color = ColorSensor(Port.S1)
+touch = TouchSensor(Port.S4)
 
 ROGERS = passwords.Key1
 STRONG = passwords.Key2
@@ -81,13 +82,13 @@ def driveCar():
     
 
 go = 'false'
-for i in range(3):
+while go != 'true':
     go = get_from_system_link('Start19', ROGERS)
     print(go)
-send_to_system_link('Start19', "BOOLEAN", 'true', ROGERS)
-wait(1000)
-go = get_from_system_link('Start19', ROGERS)
-print(go)
+#send_to_system_link('Start19', "BOOLEAN", 'true', ROGERS)
+#wait(1000)
+#go = get_from_system_link('Start19', ROGERS)
+#print(go)
 
 
 dinoFlag4 = get_from_system_link('dino4', STRONG)
@@ -98,8 +99,10 @@ while dinoFlag4 == '0':
     wait(100)
     dinoFlag4 = get_from_system_link('dino4', STRONG)
     print('dinoFlag is', dinoFlag4)
-
+    if touch.pressed() == True:
+        dinoFlag4 = '1'
+        
+ford.stop()
 print("DONE!")
 send_to_system_link('Start20', 'BOOLEAN', 'true', ROGERS)
 send_to_system_link('Start19', 'BOOLEAN', 'false', ROGERS)
-ford.stop()
